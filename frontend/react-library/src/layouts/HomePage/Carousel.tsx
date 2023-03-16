@@ -45,10 +45,10 @@ export const Carousel = () => {
                     <span className="carousel-control-next-icon" aria-hidden='true'></span>
                     <span className="visually-hidden">Next</span>
                 </button>
-
-
-                {/* Mobile */}
-                <div className="d-lg-none mt-3">
+          
+            </div>
+                  {/* Mobile*/}
+                  <div className="d-lg-none mt-3">
                     <div className="row d-flex justify-content-center align-items-center">
                         <ReturnBook/>
                     </div>
@@ -57,7 +57,6 @@ export const Carousel = () => {
                     <a className="btn btn-outline-secondary btn-lg" href="#">View More</a>
                 </div>
 
-            </div>
         </div>
 
     );
