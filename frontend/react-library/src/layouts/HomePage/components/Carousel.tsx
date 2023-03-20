@@ -2,7 +2,6 @@ import { ReturnBook } from "./ReturnBook";
 import { useEffect } from "react";
 import { useState } from "react";
 import BookModel from "../../../models/BookModel";
-import { error } from "console";
 import { SpinnerLoading } from "../../Utils/SpinnerLoading";
 
 
@@ -27,12 +26,14 @@ export const Carousel = () => {
 
             for(const key in responseData){
                 loadedBooks.push({
-                    idBook: responseData[key].idBook,
+                    id: responseData[key].idBook,
                     title: responseData[key].title,
                     author: responseData[key].author,
                     copies: responseData[key].copies,
                     copiesAvailable: responseData[key].copiesAvailable,
-                    category: responseData[key].category
+                    category: responseData[key].category,
+                    description: responseData[key].description,
+                    img: responseData[key].img
                 });
             }
             console.log(loadedBooks)
@@ -72,7 +73,7 @@ export const Carousel = () => {
                     <div className="carousel-item active">
                         <div className="row d-flex justify-content-center align-content-center">
                             {books.slice(0, 3).map(book => (
-                                <ReturnBook book={book} key={book.idBook} />
+                                <ReturnBook book={book} key={book.id} />
                             ))}
                         </div>
                     </div>
@@ -80,7 +81,7 @@ export const Carousel = () => {
                     <div className="carousel-item">
                         <div className="row d-flex justify-content-center align-content-center">
                             {books.slice(3, 6).map(book => (
-                                <ReturnBook book={book} key={book.idBook} />
+                                <ReturnBook book={book} key={book.id} />
                             ))}
                         </div>
                     </div>
@@ -88,7 +89,7 @@ export const Carousel = () => {
                     <div className="carousel-item">
                         <div className="row d-flex justify-content-center align-content-center">
                             {books.slice(6, 9).map(book => (
-                                <ReturnBook book={book} key={book.idBook} />
+                                <ReturnBook book={book} key={book.id} />
                             ))}
                         </div>
                     </div>
@@ -109,7 +110,7 @@ export const Carousel = () => {
                   {/* Mobile*/}
                   <div className="d-lg-none mt-3">
                     <div className="row d-flex justify-content-center align-items-center">
-                        <ReturnBook book={books[7]} key={books[7].idBook}/>
+                        <ReturnBook book={books[7]} key={books[7].id}/>
                     </div>
                 </div>
                 <div className="homepage-carousel-title mt-3">
