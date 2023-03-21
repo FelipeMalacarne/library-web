@@ -4,15 +4,16 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-@Entity
+
 @Table(name="book")
 @Data
+@Entity
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_book")
-    private Integer idBook;
+    @Column(name="id")
+    private Integer id;
 
     @Column(name="title")
     private String title;
@@ -28,4 +29,10 @@ public class Book {
 
     @Column(name="category")
     private String category;
+
+    @Column(name="description")
+    private String description;
+
+    @Column(name="img")
+    private String img;
 }
