@@ -37,7 +37,6 @@ export const Carousel = () => {
                     img: responseData[key].img
                 });
             }
-            console.log(loadedBooks)
             setBooks(loadedBooks);
             setIsloading(false);
         };
@@ -115,7 +114,7 @@ export const Carousel = () => {
                 </div>
             </div>
             <div className="homepage-carousel-title mt-3">
-                <Link className="btn btn-outline-secondary btn-lg" to={"/search"}>Veja Mais</Link>
+                <Link className="btn btn-outline-secondary btn-lg" href="#" to={"/search"}>Veja Mais</Link>
             </div>
 
         </div>
