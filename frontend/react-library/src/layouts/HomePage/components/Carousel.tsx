@@ -3,11 +3,12 @@ import { useEffect } from "react";
 import { useState } from "react";
 import BookModel from "../../../models/BookModel";
 import { SpinnerLoading } from "../../Utils/SpinnerLoading";
+import { Link } from "react-router-dom";
 
 
 export const Carousel = () => {
 
-    const [books,setBooks] = useState<BookModel[]>([]);
+    const [books, setBooks] = useState<BookModel[]>([]);
     const [isLoading, setIsloading] = useState(true);
     const [httpError, setHttpError] = useState(null);
 
@@ -19,12 +20,12 @@ export const Carousel = () => {
             if (!response.ok) {
                 throw new Error('Something went wrong');
             }
-            
+
             const responseJson = await response.json();
             const responseData = responseJson._embedded.books;
             const loadedBooks: BookModel[] = [];
 
-            for(const key in responseData){
+            for (const key in responseData) {
                 loadedBooks.push({
                     id: responseData[key].idBook,
                     title: responseData[key].title,
@@ -49,12 +50,12 @@ export const Carousel = () => {
 
     if (isLoading) {
         return (
-            <SpinnerLoading/>
+            <SpinnerLoading />
         )
     }
 
-    if(httpError){
-        return(
+    if (httpError) {
+        return (
             <div className="container m-5">
                 <p>{httpError}</p>
             </div>
@@ -105,17 +106,17 @@ export const Carousel = () => {
                     <span className="carousel-control-next-icon" aria-hidden='true'></span>
                     <span className="visually-hidden">Next</span>
                 </button>
-          
+
             </div>
-                  {/* Mobile*/}
-                  <div className="d-lg-none mt-3">
-                    <div className="row d-flex justify-content-center align-items-center">
-                        <ReturnBook book={books[7]} key={books[7].id}/>
-                    </div>
+            {/* Mobile*/}
+            <div className="d-lg-none mt-3">
+                <div className="row d-flex justify-content-center align-items-center">
+                    <ReturnBook book={books[7]} key={books[7].id} />
                 </div>
-                <div className="homepage-carousel-title mt-3">
-                    <a className="btn btn-outline-secondary btn-lg" href="#">Veja Mais</a>
-                </div>
+            </div>
+            <div className="homepage-carousel-title mt-3">
+                <Link className="btn btn-outline-secondary btn-lg" to={"/search"}>Veja Mais</Link>
+            </div>
 
         </div>
 
