@@ -22,7 +22,7 @@ public class BookService {
         this.checkoutRepository = checkoutRepository;
     }
 
-    public Book checkoutBoot(String userEmail, Long bookId) throws Exception {
+    public Book checkoutBook(String userEmail, Long bookId) throws Exception {
         Optional<Book> book = bookRepository.findById(bookId);
 
         Checkout validateCheckout = checkoutRepository.findByUserEmailAndBookId(userEmail, bookId);
