@@ -2,6 +2,7 @@ package com.demolib.springbootlibrary.controller;
 
 import com.demolib.springbootlibrary.entity.Book;
 import com.demolib.springbootlibrary.service.BookService;
+import com.demolib.springbootlibrary.utils.ExtractJWT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,19 +17,21 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @GetMapping("/secure/currentloans/count")
-    public int currentLoansCount(){
+    @GetMapping("/secure/currentLoans/count")
+    public int currentLoansCount(@RequestHeader(value = "Authorization") String token){
         String userEmail = "testuser@email.com";
         return bookService.currentLoansCount(userEmail);
     }
-    @GetMapping("/secure/ischeckedout/byuser")
-    public boolean checkoutBookByUser(@RequestParam Long bookId){
-        String userEmail = "testuser@email.com";
+    @GetMapping("/secure/isCheckedOutByUser")
+    public boolean checkoutBookByUser(@RequestParam Long bookId,
+                                      @RequestHeader(value = "Authorization") String token){
+        String userEmail = ExtractJWT.payloadJWTExtraction(token);
         return bookService.checkoutBookByUser(userEmail, bookId);
     }
 
     @PutMapping("/secure/checkout")
-    public Book checkoutBook (@RequestParam Long bookId) throws Exception {
+    public Book checkoutBook (@RequestParam Long bookId,
+                              @RequestHeader(value = "Authorization") String token) throws Exception {
         String userEmail = "testuser@email.com";
         return bookService.checkoutBook(userEmail, bookId);
     }
