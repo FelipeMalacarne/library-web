@@ -24,9 +24,13 @@ export const BookCheckoutPage = () => {
     const [currentLoansCount, setCurrentLoansCount] = useState(0);
     const [isLoadingCurrentLoansCount, setIsLoadingCurrentLoansCount] = useState(true);
 
+    // Is Book Checked Out?
+    const [isCheckedOut, setIsCheckedOut] = useState(false);
+    const [isLoadingCheckedOut, setIsLoadingCheckedOut] = useState(true);
 
     const bookId = (window.location.pathname).split('/')[2];
 
+    // Fetch Books
     useEffect(() => {
         const fetchBook = async () => {
             const baseUrl: string = `http://localhost:8080/api/books/${bookId}`;
@@ -59,6 +63,7 @@ export const BookCheckoutPage = () => {
         })
     }, []);
 
+    // Fetch Reviews
     useEffect(() => {
         const fetchBookReviews = async () => {
             const reviewUrl: string = `http://localhost:8080/api/reviews/search/findByBookId?bookId=${bookId}`;
@@ -105,10 +110,12 @@ export const BookCheckoutPage = () => {
             setHttpError(error.message);
         })
 
-    }, [])
+    }, []);
 
+    // Fetch User Current Loans
     useEffect(() => {
         const fetchUserCurrentLoansCount = async () => {
+            // secure endpoint needs auth
             if (authState && authState.isAuthenticated) {
                 const url = `http://localhost:8080/api/books/secure/currentLoans/count`;
                 const requestOptions = {
@@ -134,6 +141,25 @@ export const BookCheckoutPage = () => {
         })
 
     }, [authState]);
+
+    // Fetch User Check Out Book
+    useEffect(() => {
+        const fecthUserCheckedOutBook = async () => {
+            // secure endpoint needs auth
+            if (authState && authState.isAuthenticated){
+                const url = `http://localhost:8080/api/books/secure/isCheckedOutByUser/?bookId=${bookId}`
+            }
+        }
+        fecthUserCheckedOutBook().catch((error: any) => {
+            setIsLoadingCheckedOut(false);
+            setHttpError(error.message);
+        });
+
+    }, [authState]);
+
+
+
+
 
     if (isLoading || isLoadingReview || isLoadingCurrentLoansCount) {
         return (
