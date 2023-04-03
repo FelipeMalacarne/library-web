@@ -78,7 +78,7 @@ public class BookService {
 
         List<Book> books = bookRepository.findBooksByIdList(bookIdList);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         for(Book book : books){
             Optional<Checkout> checkout = checkoutList.stream()
