@@ -28,9 +28,9 @@ export const BookCheckoutPage = () => {
     const [isCheckedOut, setIsCheckedOut] = useState(false);
     const [isLoadingCheckedOut, setIsLoadingCheckedOut] = useState(true);
 
-    const bookId = (window.location.pathname).split('/')[2];
-
+    
     // Fetch Books
+    const bookId = (window.location.pathname).split('/')[2];
     useEffect(() => {
         const fetchBook = async () => {
             const baseUrl: string = `http://localhost:8080/api/books/${bookId}`;
@@ -61,7 +61,7 @@ export const BookCheckoutPage = () => {
             setIsLoading(false);
             setHttpError(error.message);
         })
-    }, []);
+    }, [isCheckedOut]);
 
     // Fetch Reviews
     useEffect(() => {
@@ -140,15 +140,31 @@ export const BookCheckoutPage = () => {
             setHttpError(error.message);
         })
 
-    }, [authState]);
+    }, [authState, isCheckedOut]);
 
     // Fetch User Check Out Book
     useEffect(() => {
         const fecthUserCheckedOutBook = async () => {
             // secure endpoint needs auth
             if (authState && authState.isAuthenticated){
-                const url = `http://localhost:8080/api/books/secure/isCheckedOutByUser/?bookId=${bookId}`
+                const url = `http://localhost:8080/api/books/secure/isCheckedOutByUser/?bookId=${bookId}`;
+                const requestOptions = {
+                    method: 'GET',
+                    headers: {
+                        Authorization: `Bearer ${authState.accessToken?.accessToken}`,
+                        'Content-Type': 'application/json'
+                    }
+                };
+                const bookCheckedOut = await fetch(url, requestOptions);
+
+                if(!bookCheckedOut.ok){
+                    throw new Error('Something went wrong!');
+                }
+
+                const bookCheckedOutResponseJson = await bookCheckedOut.json();
+                setIsCheckedOut(bookCheckedOutResponseJson)
             }
+            setIsLoadingCheckedOut(false);
         }
         fecthUserCheckedOutBook().catch((error: any) => {
             setIsLoadingCheckedOut(false);
@@ -158,10 +174,7 @@ export const BookCheckoutPage = () => {
     }, [authState]);
 
 
-
-
-
-    if (isLoading || isLoadingReview || isLoadingCurrentLoansCount) {
+    if (isLoading || isLoadingReview || isLoadingCurrentLoansCount || isLoadingCheckedOut) {
         return (
             <SpinnerLoading />
         )
@@ -173,6 +186,24 @@ export const BookCheckoutPage = () => {
             </div>
         )
     }
+
+    async function checkoutBook(){
+        const url = `http://localhost:8080/api/books/secure/checkout/?bookId=${bookId}`;
+        const requestOptions = {
+            method: 'PUT',
+            headers:{
+                Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                'Content-Type': 'application/json'
+            }
+        };
+        const checkoutResponse = await fetch(url, requestOptions);
+        if(!checkoutResponse.ok){
+            throw new Error("Something went wrong!");
+        }
+        setIsCheckedOut(true);
+    } 
+
+
 
     return (
         <div>
@@ -199,6 +230,9 @@ export const BookCheckoutPage = () => {
                         book={book}  
                         mobile={false} 
                         currentLoansCount={currentLoansCount}
+                        isAuthenticated={authState?.isAuthenticated}
+                        isCheckedOut={isCheckedOut}
+                        checkoutBook={checkoutBook}
                     />  
                 </div>
                 <hr />
@@ -227,6 +261,9 @@ export const BookCheckoutPage = () => {
                     book={book}
                     mobile={true}
                     currentLoansCount={currentLoansCount}
+                    isAuthenticated={authState?.isAuthenticated}
+                    isCheckedOut={isCheckedOut}
+                    checkoutBook={checkoutBook}
                 />
                 <hr />
                 <LatestReviews reviews={reviews} bookId={book?.id} mobile={true} />
