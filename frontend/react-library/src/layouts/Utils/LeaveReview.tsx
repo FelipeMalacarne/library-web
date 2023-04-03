@@ -16,11 +16,11 @@ export const LeaveReview: React.FC<{submitReview: any}> = (props) => {
   return(
     <div className="dropdown" style={{cursor: 'pointer'}}>
       <h5 className="dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle='dropdown'>
-        Leave a review?
+        Quer deixar uma avaliação?
       </h5>
       <ul id="submitReviewRating" className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         {[...Array(11)].map((_, i) =>
-          <li key={i}><button onClick={() => starValue(i)} className="dropdown-item">{i/2} star</button></li>
+          <li key={i}><button onClick={() => starValue(i)} className="dropdown-item">{i/2} estrelas</button></li>
         )}
       </ul>
       <StarsReview rating={starInput} size={32}/>
@@ -30,7 +30,7 @@ export const LeaveReview: React.FC<{submitReview: any}> = (props) => {
           <hr />
           <div className="mb-3">
             <label className="form-label">
-              Description
+              Descrição
             </label>
             <textarea 
               className="form-control" 
@@ -43,7 +43,7 @@ export const LeaveReview: React.FC<{submitReview: any}> = (props) => {
           </div>
           <div>
             <button type="button" onClick={() => props.submitReview(starInput, reviewDescription)} className="btn btn-primary mt-3">
-              Submit Review
+              Enviar Avaliação
             </button>
           </div>
         </form>

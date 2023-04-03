@@ -38,7 +38,7 @@ export const Pagination: React.FC<{
                 <ul className="pagination">
                     <li className="page-item" onClick={() => props.paginate(1)}>
                         <button className="page-link">
-                            First Page
+                            Primeira
                         </button>
                     </li>
                     {pageNumbers.map(number => (
@@ -51,7 +51,7 @@ export const Pagination: React.FC<{
                     ))}
                     <li className="page-item" onClick={() => props.paginate(props.totalPages)}>
                         <button className="page-link">
-                            Last Page
+                            Última
                         </button>
                     </li>
                 </ul>

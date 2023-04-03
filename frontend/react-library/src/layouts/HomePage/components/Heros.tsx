@@ -23,7 +23,7 @@ export const Heros = () => {
                             </p>
                             {authState?.isAuthenticated ?
 
-                                <Link className="btn main-color btn-lg text-white" to="search">Explore top Books</Link>
+                                <Link className="btn main-color btn-lg text-white" to="search">Explore os livros</Link>
                                 :
                                 <Link className="btn main-color btn-lg text-white" to="/login">Sign Up</Link>
                             }
@@ -63,7 +63,7 @@ export const Heros = () => {
                             </p>
                             {authState?.isAuthenticated ?
 
-                                <Link className="btn main-color btn-lg text-white" to="search">Explore top Books</Link>
+                                <Link className="btn main-color btn-lg text-white" to="search">xplore os livros</Link>
                                 :
                                 <Link className="btn main-color btn-lg text-white" to="/login">Sign Up</Link>
                             }

@@ -18,7 +18,7 @@ export const Navbar = () => {
   return (
     <nav className='navbar navbar-expand-lg navbar-dark main-color py-3'>
       <div className="container-fluid">
-        <span className="navbar-brand">Livraria</span>
+        <span className="navbar-brand">Biblioteca</span>
         <button
           className='navbar-toggler' type='button'
           data-bs-toggle='collapse' data-bs-target='#navbarNavDropdown'
@@ -33,8 +33,13 @@ export const Navbar = () => {
               <NavLink className='nav-link' to={"/home"}>Home</NavLink>
             </li>
             <li className='nav-item'>
-              <NavLink className='nav-link' to={"/search"}>Search Books</NavLink>
+              <NavLink className='nav-link' to={"/search"}>Encontre Livros</NavLink>
             </li>
+            {authState.isAuthenticated &&
+              <li className='nav-item'>
+                <NavLink className='nav-link' to={"/shelf"}>Estante</NavLink>
+              </li>
+            }
           </ul>
           <ul className='navbar-nav ms-auto'>
             {!authState.isAuthenticated ?

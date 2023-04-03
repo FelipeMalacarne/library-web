@@ -88,7 +88,7 @@ export const ReviewListPage = () => {
         <h3>Comments: ({reviews.length})</h3>
       </div>
       <p>
-        {indexOfFirstReview + 1} to {lastItem} of {totalAmountOfReviews} items:
+        {indexOfFirstReview + 1} até {lastItem} de {totalAmountOfReviews} itens:
       </p>
       <div className="row">
         {reviews.map(review => (

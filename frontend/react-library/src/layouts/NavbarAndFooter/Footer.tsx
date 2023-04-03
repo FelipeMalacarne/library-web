@@ -10,7 +10,7 @@ export const Footer = () => {
                     <Link className="nav-link px-2 text-white" to={"/home"}> Home</Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link px-2 text-white" to={"/search"}>Search Books</Link>
+                    <Link className="nav-link px-2 text-white" to={"/search"}>Encontre Livros</Link>
                 </li>
             </ul>
             </footer>

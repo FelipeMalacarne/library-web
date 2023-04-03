@@ -10,7 +10,7 @@ export const LatestReviews: React.FC<{
 
     <div className={props.mobile ? 'mt-3' : 'row mt-5'}>
       <div className={props.mobile ? '' : 'col-sm-2 col-md-2'}>
-        <h2>Latest Reviews: </h2>
+        <h2>Ultimas Avaliações: </h2>
       </div>
       <div className="col-sm-10 col-md-10">
         {props.reviews.length > 0 ?
@@ -22,14 +22,14 @@ export const LatestReviews: React.FC<{
               <div className="m-3">
                 <Link type='button' className='btn main-color btn-md text-white'
                     to={`/review-list/${props.bookId}`}>
-                      Reach all reviews.
+                      Veja todas avaliações.
                     </Link>
               </div>
           </>
           :
           <div className="m-3">
             <p className="lead">
-              Currently there are no reviews for this book
+              Atualmente não existem avaliações para esse livro.
             </p>
           </div>
 

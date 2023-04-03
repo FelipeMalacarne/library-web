@@ -18,15 +18,15 @@ export  const CheckoutAndReviewBox: React.FC<{
         if(props.isAuthenticated){
             if(!props.isCheckedOut && props.currentLoansCount < 5){
                 return(
-                    <button onClick={() => props.checkoutBook()} className="btn btn-success btn-lg">Checkout</button>
+                    <button onClick={() => props.checkoutBook()} className="btn btn-success btn-lg">Retirar</button>
                 );
             } else if(props.isCheckedOut){
                 return(
-                    <p><b>Book Checked Out. Enjoy!</b></p>
+                    <p><b>Livro retirado. Aproveite!</b></p>
                 );
             } else if(!props.isCheckedOut){
                 return(
-                    <p className="text-danger">Too many books checked out.</p>
+                    <p className="text-danger">Muitos livros retirados.</p>
                 );
             }
         }
@@ -43,7 +43,7 @@ export  const CheckoutAndReviewBox: React.FC<{
             );
         } else if(props.isAuthenticated && props.isReviewLeft){
             return(
-                <p><b>Thank you for your review!</b></p>
+                <p><b>Obrigado pela sua avaliação!</b></p>
             )
         }
         return (
@@ -57,34 +57,34 @@ export  const CheckoutAndReviewBox: React.FC<{
                 <div className="mt-3">
                     <p>
                         <b>{props.currentLoansCount}/5 </b>
-                        books checked out
+                        livros emprestados
                     </p>
                     <hr />
                     {props.book && props.book.copiesAvailable && 
                         props.book.copiesAvailable > 0 ? 
                             <h4 className='text-success'>
-                                Available
+                                Disponível
                             </h4>
                             :
                             <h4 className="text-danger">
-                                Wait List
+                                Lista de espera
                             </h4>
                     }
                     <div className="row">
                         <p className="col-6 lead">
                             <b>{props.book?.copies} </b>
-                            copies
+                            cópias
                         </p>
                         <p className="col-6 lead">
                             <b>{props.book?.copiesAvailable} </b>
-                            available
+                            disponíveis
                         </p>
                     </div>
                 </div>
                 {buttonRender()}
                 <hr />
                 <p className="mt-3">
-                    This number can change until placing order has been complete
+                    Esse número pode mudar até que a solicitação seja concuída.
                 </p>
                 {reviewRender()}
             </div>

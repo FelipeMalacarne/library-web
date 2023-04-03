@@ -14,7 +14,7 @@ export const SearchBooksPage = () => {
     const [totalPages, setTotalPages] = useState(0);
     const [search, setSearch] = useState('');
     const [searchUrl, setSearchUrl] = useState('');
-    const [categorySelection, setCategorySelection] = useState('Book category')
+    const [categorySelection, setCategorySelection] = useState('Categorias')
 
     useEffect(() => {
         const fetchBooks = async () => {
@@ -102,7 +102,7 @@ export const SearchBooksPage = () => {
             setCategorySelection(value)
             setSearchUrl(`/search/findByCategory?category=${value.toLowerCase()}&page=<pageNumber>&$size=${booksPerPage}`)
         } else {
-            setCategorySelection('All')
+            setCategorySelection('Todos')
             setSearchUrl(`?page=<pageNumber>&size=${booksPerPage}`)
         }
     }
@@ -122,13 +122,13 @@ export const SearchBooksPage = () => {
                             <div className="d-flex">
                                 <input
                                     className="form-control me-2" type="search"
-                                    placeholder="Search" aria-labelledby="Search"
+                                    placeholder="Procurar" aria-labelledby="Search"
                                     onChange={e => setSearch(e.target.value)}
                                 />
                                 <button
                                     className="btn btn-outline-success"
                                     onClick={() => searchHandleChange()}
-                                >Search</button>
+                                >Procurar</button>
                             </div>
                         </div>
                         <div className="col-4">
@@ -141,7 +141,7 @@ export const SearchBooksPage = () => {
                                     <li onClick={() => categoryField('All')}>
                                         {/* todo, get from loadedBooks */}
                                         <a className="dropdown-item" href="#">
-                                            All
+                                            Todos
                                         </a>
                                     </li>
                                     <li onClick={() => categoryField('Fantasia')}>
@@ -165,10 +165,10 @@ export const SearchBooksPage = () => {
                         totalAmountOfBooks > 0 ?
                             <>
                                 <div className="mt-3">
-                                    <h5> Number of results: ({totalAmountOfBooks})</h5>
+                                    <h5> Número de resultados: ({totalAmountOfBooks})</h5>
                                 </div>
                                 <p>
-                                    {IndexOfFirstBook + 1} to {lastItem} of {totalAmountOfBooks} items:
+                                    {IndexOfFirstBook + 1} até {lastItem} de {totalAmountOfBooks} items:
                                 </p>
                                 {books.map(book => (
                                     <SearchBook book={book} key={book.id} />
