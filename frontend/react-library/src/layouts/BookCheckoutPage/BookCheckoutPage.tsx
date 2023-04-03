@@ -20,6 +20,9 @@ export const BookCheckoutPage = () => {
     const [totalStars, setTotalStars] = useState(0);
     const [isLoadingReview, setIsLoadingReview] = useState(true);
 
+    const [isReviewLeft, setIsReviewLeft] = useState(false);
+    const [isLoadingUserReview, setIsLoadingUserReview] = useState(true);
+
     // Loans Count state
     const [currentLoansCount, setCurrentLoansCount] = useState(0);
     const [isLoadingCurrentLoansCount, setIsLoadingCurrentLoansCount] = useState(true);
@@ -110,7 +113,34 @@ export const BookCheckoutPage = () => {
             setHttpError(error.message);
         })
 
-    }, []);
+    }, [isReviewLeft]);
+
+    // Fetch User Review
+    useEffect(() => {
+        const fetchUserReviewBook = async () => {
+            if(authState && authState.isAuthenticated){
+                const url = `http://localhost:8080/api/reviews/secure/user/book/?bookId=${bookId}`;
+                const requestOptions = {
+                    method: 'GET',
+                    headers: {
+                        Authorization: `Bearer ${authState.accessToken?.accessToken}`,
+                        'Content-type': 'application/json'
+                    }
+                };
+                const userReview = await fetch(url, requestOptions)
+                if(!userReview.ok){
+                    throw new Error('Something went wrong');
+                }
+                const userReviewResponseJson = await userReview.json();
+                setIsReviewLeft(userReviewResponseJson);
+            }
+            setIsLoadingUserReview(false);
+        }
+        fetchUserReviewBook().catch((error: any) => {
+            setIsLoadingUserReview(false);
+            setHttpError(error.message);
+        })
+    },[authState]);
 
     // Fetch User Current Loans
     useEffect(() => {
@@ -174,7 +204,13 @@ export const BookCheckoutPage = () => {
     }, [authState]);
 
 
-    if (isLoading || isLoadingReview || isLoadingCurrentLoansCount || isLoadingCheckedOut) {
+    if (
+        isLoading || 
+        isLoadingReview || 
+        isLoadingCurrentLoansCount || 
+        isLoadingCheckedOut || 
+        isLoadingUserReview
+        ) {
         return (
             <SpinnerLoading />
         )
