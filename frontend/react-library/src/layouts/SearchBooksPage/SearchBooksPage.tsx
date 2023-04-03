@@ -109,8 +109,7 @@ export const SearchBooksPage = () => {
 
     const indexOfLastBook: number = currentPage * booksPerPage;
     const IndexOfFirstBook: number = indexOfLastBook - booksPerPage;
-    let lastItem: number = booksPerPage * currentPage <= totalAmountOfBooks ?
-        booksPerPage * currentPage : totalAmountOfBooks;
+    let lastItem: number = indexOfLastBook <= totalAmountOfBooks ? indexOfLastBook : totalAmountOfBooks;
 
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
