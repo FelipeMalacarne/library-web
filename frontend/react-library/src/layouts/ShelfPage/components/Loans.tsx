@@ -16,7 +16,8 @@ export const Loans = () => {
   useEffect(() => {
     const fetchUserCurrentLoans = async () => {
       if (authState && authState.isAuthenticated) {
-        const url = `http://localhost:8080/api/books/secure/currentLoans`;
+        const envUrl = process.env.REACT_APP_BASE_URL;
+        const url = `${envUrl}/api/books/secure/currentLoans`;
         const requestOptions = {
           method: 'GET',
           headers: {
@@ -63,7 +64,7 @@ export const Loans = () => {
         {
           shelfCurrentLoans.length > 0 ?
             <>
-              <h5>Empréstimos atuais</h5>
+              <h5 className="m-3">Empréstimos atuais</h5>
 
               {shelfCurrentLoans.map(shelfCurrentLoan => (
                 <div key={shelfCurrentLoan.book.id}>
@@ -150,7 +151,7 @@ export const Loans = () => {
         {
           shelfCurrentLoans.length > 0 ?
             <>
-              <h5 className="mb-3">Empréstimos atuais</h5>
+              <h5 className="m-3">Empréstimos atuais</h5>
 
               {shelfCurrentLoans.map(shelfCurrentLoan => (
                 <div key={shelfCurrentLoan.book.id}>
