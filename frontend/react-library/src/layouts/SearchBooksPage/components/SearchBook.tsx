@@ -14,7 +14,7 @@ export const SearchBook: React.FC<{ book: BookModel }> = (props) => {
                                 height='196'
                                 alt="Book" />
                             :
-                            <img src={require("./../../../Images/BooksImages/livro-1.jpg")}
+                            <img src={require("./../../../Images/BooksImages/default.jpg")}
                                 width='123'
                                 height='196'
                                 alt="Book" />
@@ -30,7 +30,7 @@ export const SearchBook: React.FC<{ book: BookModel }> = (props) => {
                                 height='196'
                                 alt="Book" />
                             :
-                            <img src={require("./../../../Images/BooksImages/livro-1.jpg")}
+                            <img src={require("./../../../Images/BooksImages/default.jpg")}
                                 width='123'
                                 height='196'
                                 alt="Book" />
