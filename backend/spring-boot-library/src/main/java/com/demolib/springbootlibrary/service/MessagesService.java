@@ -8,12 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class MessageService {
+public class MessagesService {
 
     private MessageRepository messageRepository;
 
     @Autowired
-    public MessageService(MessageRepository messageRepository){
+    public MessagesService(MessageRepository messageRepository){
         this.messageRepository = messageRepository;
     }
 
