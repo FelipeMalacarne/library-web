@@ -10,24 +10,24 @@ export const PostNewMessage = () => {
   const [displayWarning, setDisplayWarning] = useState(false);
   const [displaySuccess, setDisplaySuccess] = useState(false);
 
-  async function submitNewQuestion(){
+  async function submitNewQuestion() {
     const envUrl = process.env.REACT_APP_BASE_URL;
     const url = `${envUrl}/api/messages/secure/add/message`;
     console.log(title)
     console.log(question)
-    if(authState?.isAuthenticated && title !== "" && question !== ""){
+    if (authState?.isAuthenticated && title !== "" && question !== "") {
       const messageRequestModel: MessageModel = new MessageModel(title, question);
       const requestOptions = {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${authState.accessToken?.accessToken}`,  
+          Authorization: `Bearer ${authState.accessToken?.accessToken}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(messageRequestModel)
       };
 
       const submitNewQuestionResponse = await fetch(url, requestOptions);
-      if(!submitNewQuestionResponse.ok){
+      if (!submitNewQuestionResponse.ok) {
         throw new Error('Something went wrong');
       }
 
@@ -46,11 +46,6 @@ export const PostNewMessage = () => {
 
   return (
     <div className="card mt-3">
-      {displaySuccess &&
-        <div className="alert alert-success" role="alert">
-          Pergunta adicionada com sucesso.
-        </div>
-      }
       <div className="card-header">
         Faça uma pergunta para um admin da biblioteca
       </div>
@@ -59,6 +54,11 @@ export const PostNewMessage = () => {
           {displayWarning &&
             <div className="alert alert-danger" role="alert">
               Todos campos devem ser preenchidos
+            </div>
+          }
+          {displaySuccess &&
+            <div className="alert alert-success" role="alert">
+              Pergunta adicionada com sucesso.
             </div>
           }
           <div className="mb-3">
